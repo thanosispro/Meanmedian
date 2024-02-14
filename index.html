@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="bootstrap.css"><link rel="stylesheet" href="hero.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <br>
+    <center>
+        <div class="input-group mb-3" style="width: 500pt;">
+            <input value=1 onfocus="this.addEventListener('keydown',(event)=>{if(event.key=='Enter'){firstprocess()}})" onblur=""id="firstinput" type="number" min="1" class="form-control" placeholder="ENTER NO. OF CLASSSES YOU HAVE" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <button onclick="firstprocess()" " class="btn btn-outline-secondary" type="button" id="button-addon2">GET OUTPUT</button>
+          </div>
+    </center>
+    <center>
+        <br>
+        <div class="get">
+            
+        </div>
+        <table  style="width: 500pt;">
+        <thead>
+             <tr  style="font-size: 18px;">
+                 <th style="width: 750px;">LOWER.CLASS--UPPERCLASS</th>
+                 <th style="width: 200px; text-align: center; align-items: center;">FREQUENCY</th>
+                 <th style="width: 200px;">MIDVALUE</th>
+                 <th style="width: 100px;">F.M</th>
+                 <th style="width: 150px;">C.F</th>
+             </tr>
+         </thead>
+             <tbody class="table1">
+        
+               
+     </tbody>
+     </table></center>
+     <br>
+     <center><div id="button" onclick="lastprocess()"></div>
+    <div class="besttext1" id="result">
+
+    </div> <br>
+    <div class="besttext2" id="medianresult">
+
+    </div>
+    </center>
+    
+</body>
+<script src="try.js"></script>
+</html>

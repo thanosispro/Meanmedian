@@ -1,0 +1,63 @@
+.buto{
+    padding:10px 20px;
+    background-color:aqua;
+    text-align:center;
+    font-weight:bolder;
+    font-family:sans-serif;
+    cursor:pointer;
+    border:none;
+    transition:background-color 0.5s ease-in-out,transform 0.5s ease;
+    border-radius:20px;
+}
+.buto:hover{
+   transform:scale(1.1);
+background-color:rgb(7, 87, 161);
+}
+#besttext
+{
+    font-weight: bold;
+    text-align:center;
+    font-family:sans-serif;
+
+}
+.besttext1{
+    font-weight:bold;
+    color:#333;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+    font-size:20px;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    
+    border: none; /* Set initial border color */
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+td:hover, th:hover {
+    border-color: #ffcc00; /* Set border color on hover */
+    box-shadow: 0 0 10px #ffcc00; /* Add a box shadow for a shining effect */
+    transition: border-color 0.5s, box-shadow 0.5s; /* Smooth transition effect */
+    background-color: #f5f5f5;
+}
+.get input{
+    margin-left:20px;
+    width: 50pt; border :2px solid black;
+   transition : all 0.1s ease-in-out;
+}
+
+.besttext2
+{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bolder;
+    font-size:20px;
+}
