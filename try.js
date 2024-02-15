@@ -2,13 +2,16 @@ const mainbr=`<td style="text-align: center; "><input class="firstclass" type="n
 <td><input class="frequency" style="width:100px;font-weight:bold; text-align:center;" type="number"></td>
 <td class="midvalue" id="besttext"></td>
 <td class="f.m" id="besttext"></td>
-<td class="c.f" id="besttext"></td>`
+<td class="c.f" id="besttext"></td>
+<td class="fmm" id="besttext"></td>`
 let medianresult=document.getElementById('medianresult')
+let realmean;
+let sdresult=document.getElementById('standard')
 let firstclick=document.getElementById("button-addon2")
 console.log(firstclick)
 let table=document.getElementsByClassName('table1')
-let mdclass,q1class,q3class,aclw,acup,accf,acf,finalmd,classin
-let mdr,q1r,q3r,frequency=[],fm=[],cf=[],sumf=0,sumfm=0,upperclass=[],lowerclass=[],midvalue=[],i,j,min,max,diff,fmclass,frequencyclass,midvalueclass,upclass,lwclass;
+let mdclass,q1class,q3class,aclw,acup,accf,acf,finalmd,classin,sdsum=0
+let actualsd,mdr,q1r,q3r,frequency=[],fm=[],sdf=[],cf=[],sumf=0,sumfm=0,upperclass=[],lowerclass=[],midvalue=[],i,j,min,max,diff,fmclass,frequencyclass,midvalueclass,upclass,lwclass,sdclass;
 function fillup()
     {
         min= Number.parseInt(document.getElementById('min').value)
@@ -51,7 +54,7 @@ function firstprocess()
         midvalueclass=document.getElementsByClassName('midvalue')
         fmclass=document.getElementsByClassName("f.m")
         cfclass=document.getElementsByClassName('c.f')
-        
+        sdclass=document.getElementsByClassName('fmm')
 
         geteverything()
     }
@@ -59,16 +62,17 @@ function firstprocess()
 function median(md)
 {
     
-    for(i=0;i<=userinput-1;i++)
+    for(i=1;i<userinput;i++)
     {
         console.log(md)
-        if(md > Number.parseInt(cfclass[i].innerHTML) && md< Number.parseInt(cfclass[i+1].innerHTML))
+        if(md > Number.parseInt(cfclass[i-1].innerHTML) && md < Number.parseInt(cfclass[i].innerHTML))
         {
             console.log('am in')
-            aclw= lowerclass[i+1]
-            acup=upperclass[i+1]
-            acf=frequency[i+1]
-            accf=Number.parseInt(cfclass[i].innerHTML)
+            aclw= lowerclass[i]
+            acup=upperclass[i]
+            acf=frequency[i]
+            accf=Number.parseInt(cfclass[i-1].innerHTML)
+            console.log(aclw,acup,acf,accf)
             break;
 
         }
@@ -76,10 +80,34 @@ function median(md)
         
     }
     classin= lowerclass[0]-upperclass[0]
-    console.log(classin)
+    
     finalmd= Number(acup+(md-accf)/acf*classin).toFixed(2)
     return [aclw,acup,acf,accf,finalmd]
 }
+//MEDIA FUNCTION ENEDE, 
+
+//                                    ****** SD IS HERE
+
+function sd(mean)
+{
+    sdsum=0;
+    for(i=0;i<userinput;i++)
+    {
+        sdf[i]=  Number(frequency[i]*(midvalue[i]-mean)**2)
+        sdclass[i].innerHTML= (sdf[i]).toFixed(2)
+        sdsum=Number.parseFloat(sdsum)+Number.parseFloat(sdf[i])
+    }
+    actualsd= (Math.sqrt(sdsum/sumf)).toFixed(2)
+    console.log(sdsum/sumf)
+    console.log(actualsd)
+    return [actualsd,(sdsum).toFixed(2)]
+}
+
+
+
+
+
+// ************************************ WAS LAST PROCESS
     function lastbutton()
     
     {
@@ -106,18 +134,21 @@ function median(md)
       mdr= median(sumf/2)
       q1r=median(sumf/4)
       q3r=median(sumf/4*3)
+      realmean=sumfm/sumf
       medianresult.innerHTML=`for M.D, class =${mdr[1]+'--' +mdr[0]} c.f=${mdr[3]},f=${mdr[2]} L=${mdr[1]} <br>
       for Q.1, class =${q1r[1]+'--' +q1r[0]} c.f=${q1r[3]},f=${q1r[2]} L=${q1r[1]} <br>
       for Q.3, class =${q3r[1]+'--' +q3r[0]} c.f=${q3r[3]},f=${q3r[2]} L=${q3r[1]} 
       <br>
       M.d= ${mdr[4]},    Q.1=${q1r[4]},    Q.3=${q3r[4]}
       `
+      sdresult.innerHTML=`Σf(m-x̄)²== ${sd(realmean)[1]} AND N == ${sumf} <br>
+      S.D=  ${sd(realmean)[0]}`
     }
 
     // ACTUAL CALCULATION IS ENDED HERE AND JUST ENJOY
      function lastprocess()
      {
-         sumf=0;sumfm=0;
+         sumf=0;sumfm=0;sdsum=0
          for(i=0;i<userinput;i++)
          {
              if(upclass[i].value=='')
